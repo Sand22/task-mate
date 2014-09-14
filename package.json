@@ -1,0 +1,31 @@
+{
+    "name": "collaborative",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node server"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "dependencies": {
+        "express": "~4.9.x",
+        "mongoose": "~3.8.x"
+    },
+    "devDependencies": {
+        "bower": "~1.3",
+        "gulp": "~3.8",
+        "gulp-sass": "~0.7",
+        "gulp-uglify": "~0.3",
+        "gulp-concat": "~2.3.4",
+        "gulp-autoprefixer": "~0.0.8",
+        "gulp-compressor": "~0.1.0",
+        "karma": "~0.12",
+        "karma-script-launcher": "~0.1.0",
+        "karma-firefox-launcher": "~0.1.3",
+        "karma-chrome-launcher": "~0.1.4",
+        "karma-phantomjs-launcher": "~0.1.4",
+        "karma-jasmine": "~0.2.0",
+        "karma-coverage": "~0.2.4",
+        "gulp-karma": "~0.0.4"
+    }
+}

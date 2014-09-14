@@ -1,0 +1,14 @@
+{
+    "name": "collaborative",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular": "~1.2.x",
+        "angular-animate": "~1.2.x",
+        "angular-ui-router": "~0.2.x",
+        "restangular": "~1.4.x",
+        "gsap": "~1.13.x"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.x"
+    }
+}
