@@ -1,6 +1,10 @@
 {
-    "name": "collaborative",
+    "name": "TaskMate",
     "version": "0.0.1",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/Sand22/task-mate.git"
+    },
     "scripts": {
         "start": "node server"
     },
@@ -9,7 +13,8 @@
     },
     "dependencies": {
         "express": "~4.9.x",
-        "mongoose": "~3.8.x"
+        "mongoose": "~3.8.x",
+        "socket.io": "~1.1.x"
     },
     "devDependencies": {
         "bower": "~1.3",
@@ -27,5 +32,6 @@
         "karma-jasmine": "~0.2.0",
         "karma-coverage": "~0.2.4",
         "gulp-karma": "~0.0.4"
-    }
+    },
+    "licence": "MIT"
 }
