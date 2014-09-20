@@ -26,6 +26,7 @@
         "gulp-autoprefixer": "~0.0.8",
         "gulp-compressor": "~0.1.0",
         "gulp-jshint": "~1.8.x",
+        "gulp-rename": "~1.2.x",
         "karma": "~0.12",
         "karma-script-launcher": "~0.1.0",
         "karma-firefox-launcher": "~0.1.3",

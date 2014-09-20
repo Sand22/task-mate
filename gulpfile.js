@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     compressor = require('gulp-compressor'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
+    rename = require('gulp-rename'),
     testFiles = 'app/public/modules/**/tests/**/**/*.js',
     scripts = [
         'app/vendor/**/*.min.js',
@@ -30,7 +31,8 @@ gulp.task('sass', function () {
         }))
         .pipe(prefix('last 1 version', '> 1%', 'ie 8', 'ie 7'))
         .pipe(compressor())
-        .pipe(gulp.dest('app/assets/stylesheets/build'));
+        .pipe(rename('app.min.css'))
+        .pipe(gulp.dest('app/public/assets/stylesheets/build'));
 });
 
 gulp.task('test', function() {
