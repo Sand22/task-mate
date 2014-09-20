@@ -5,30 +5,36 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     prefix = require('gulp-autoprefixer'),
     compressor = require('gulp-compressor'),
-    testFiles = 'app/modules/**/**/tests/*.js',
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish'),
+    testFiles = 'app/public/modules/**/tests/**/**/*.js',
     scripts = [
         'app/vendor/**/*.min.js',
-        'app/modules/**/*.js',
-        'app/modules/**/**/*.js',
-        '!app/modules/**/**/tests/*.js'
+        'app/public/app.js',
+        'app/public/modules/**/**/*.js',
+        '!app/public/modules/**/tests/**/**/*.js'
     ],
-    sassFiles = 'app/modules/**/public/assets/css/*.scss';
+    serverSideScripts = [
+        'app/server/server.js',
+        'app/server/**/*.js'
+    ],
+    sassFiles = 'app/public/assets/stylesheets/*.scss';
 
 gulp.task('sass', function () {
-    "use strict";
+    'use strict';
 
     gulp.src(sassFiles)
         .pipe(sass({
             sourceMap: 'sass',
             sourceComments: 'map'
         }))
-        .pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7"))
+        .pipe(prefix('last 1 version', '> 1%', 'ie 8', 'ie 7'))
         .pipe(compressor())
-        .pipe(gulp.dest('app/build'));
+        .pipe(gulp.dest('app/assets/stylesheets/build'));
 });
 
 gulp.task('test', function() {
-    "use strict";
+    'use strict';
 
     gulp.src(testFiles)
         .pipe(karma({
@@ -38,10 +44,18 @@ gulp.task('test', function() {
 });
 
 gulp.task('uglify', function() {
-    "use strict";
+    'use strict';
 
     gulp.src(scripts)
         .pipe(uglify())
-        .pipe(concat("app.min.js"))
-        .pipe(gulp.dest('app/build'));
+        .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('app/public'));
+});
+
+gulp.task('jshint', function () {
+    'use strict';
+
+    return gulp.src(scripts.slice(1,3).concat(serverSideScripts))
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish));
 });
