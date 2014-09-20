@@ -8,18 +8,18 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     rename = require('gulp-rename'),
-    testFiles = 'app/public/modules/**/tests/**/**/*.js',
+    testFiles = 'public/modules/**/tests/**/**/*.js',
     scripts = [
-        'app/vendor/**/*.min.js',
-        'app/public/app.js',
-        'app/public/modules/**/**/*.js',
-        '!app/public/modules/**/tests/**/**/*.js'
+        'vendor/**/*.min.js',
+        'public/app.js',
+        'public/modules/**/**/*.js',
+        '!public/modules/**/tests/**/**/*.js'
     ],
     serverSideScripts = [
-        'app/server/server.js',
-        'app/server/**/*.js'
+        'server/server.js',
+        'server/**/*.js'
     ],
-    sassFiles = 'app/public/assets/stylesheets/*.scss';
+    sassFiles = 'public/assets/stylesheets/*.scss';
 
 gulp.task('sass', function () {
     'use strict';
@@ -32,7 +32,7 @@ gulp.task('sass', function () {
         .pipe(prefix('last 1 version', '> 1%', 'ie 8', 'ie 7'))
         .pipe(compressor())
         .pipe(rename('app.min.css'))
-        .pipe(gulp.dest('app/public/assets/stylesheets/build'));
+        .pipe(gulp.dest('public/assets/stylesheets/build'));
 });
 
 gulp.task('test', function() {
@@ -51,7 +51,7 @@ gulp.task('uglify', function() {
     gulp.src(scripts)
         .pipe(uglify())
         .pipe(concat('app.min.js'))
-        .pipe(gulp.dest('app/public'));
+        .pipe(gulp.dest('public'));
 });
 
 gulp.task('jshint', function () {

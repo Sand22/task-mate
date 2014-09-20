@@ -3,7 +3,7 @@ module.exports = function (config) {
 
     config.set({
         files : [
-            'app/modules/**/public/tests/*.js'
+            'public/modules/**/tests/**/**/*.js'
         ],
         basePath: '',
         frameworks: ['jasmine'],
