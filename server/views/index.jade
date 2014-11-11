@@ -4,5 +4,7 @@ html
         title Task Mate
         link(rel="stylesheet", href="vendor/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="assets/stylesheets/build/app.min.css")
+        base(href="/")
     body(ng-app='taskMate')
-        include ./includes/scripts
+        div(ng-view)
+        include includes/scripts
