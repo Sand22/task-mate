@@ -1,15 +1,24 @@
 module.exports = function (config) {
-    'use strict';
+  'use strict';
 
-    config.set({
-        files : [
-            'public/modules/**/tests/**/**/*.js'
-        ],
-        basePath: '',
-        frameworks: ['jasmine'],
-        browsers: ['PhantomJS'],
-        autoWatch: false,
-        singleRun: true,
-        colors: true
-    });
+  config.set({
+    files: [
+      'public/vendor/angular/angular.js',
+      'public/vendor/angular-mocks/angular-mocks.js',
+      'public/app.js',
+      'public/!(vendor)/**/*.js'
+    ],
+    basePath: '',
+    preprocessors: {
+      'public/app.js': ['coverage'],
+      'public/!(vendor)/!(tests)/*.js': ['coverage']
+    },
+    reporters: ['coverage', 'mocha'],
+    frameworks: ['jasmine'],
+    browsers: ['PhantomJS'],
+    captureTimeout: 60000,
+    autoWatch: false,
+    singleRun: true,
+    colors: true
+  });
 };
