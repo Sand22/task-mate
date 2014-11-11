@@ -9,13 +9,20 @@ var gulp = require('gulp'),
   stylish = require('jshint-stylish'),
   rename = require('gulp-rename'),
   ngAnnotate = require('gulp-ng-annotate'),
-  testFiles = 'public/**/tests/**/**/*.js',
+  testFiles = [
+    'public/vendor/angular/angular.js',
+    'public/vendor/angular-mocks/angular-mocks.js',
+    'public/vendor/angular-route/angular-route.js',
+    'public/*.js',
+    'public/!(vendor)/**/*.js',
+    'public/**/tests/**/**/*.js'
+  ],
   scripts = [
     'public/vendor/!(bootstrap|jquery|angular-mocks)/*.min.js',
     'public/*.js',
     'public/!(vendor)/**/*.js',
     '!public/**/tests/**/**/*.js'
-  ],
+  ]
   serverSideScripts = [
     'server.js',
     'server/**/*.js'
@@ -62,8 +69,4 @@ gulp.task('jshint', function () {
   return gulp.src(scripts.slice(1, 3).concat(serverSideScripts))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
-});
-
-gulp.task('annotate', function () {
-  'use strict';
 });
