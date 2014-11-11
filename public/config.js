@@ -8,7 +8,8 @@
   function config($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/views/common/partials/main'
+        templateUrl: '/views/common/partials/main',
+        roles: ['user']
       })
       .when('/404', {
         templateUrl: '/views/common/partials/404'
