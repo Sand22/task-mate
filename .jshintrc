@@ -64,6 +64,7 @@
     "wsh": false,
     "yui": false,
     "globals": {
-        "angular": true
+        "angular": true,
+        "inject": true
     }
 }
