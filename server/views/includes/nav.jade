@@ -2,6 +2,7 @@ nav.navbar.navbar-inverse(role="navigation")
   .container-fluid
     .navbar-header
       a.navbar-brand(href="#") TaskMate
-    ul.nav.navbar-nav.navbar-right
-      li
-        a(href="#") Sign up
+    ul.nav.navbar-nav.navbar-right(ng-controller="UserController as User")
+      li(ng-controller="LoginController as Login")
+        a.sign-up(href="#", ng-if="User.isAuthenticated()", ng-cloak, ng-click="Login.logout()") Sign out
+        a.sign-up(href="#") Sign up
