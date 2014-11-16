@@ -4,20 +4,28 @@
   angular.module('app.auth')
     .factory('UserService', UserService);
 
-  /* @ngInject */
-  function UserService($q, $timeout) {
+  function UserService($firebaseSimpleLogin, firebaseUtils, $q) {
+    var auth = $firebaseSimpleLogin(firebaseUtils.ref);
+
     return {
-      isAuthenticated: isAuthenticated
+      getUser: getUser,
+      isAuthenticated: false
     };
 
     ////**////
 
-    function isAuthenticated() {
+    function getUser() {
       var dfd = $q.defer();
 
-      $timeout(function () {
-        dfd.reject(false);
-      }, 0);
+      auth.$getCurrentUser().then(function (user) {
+        if(!user) {
+          dfd.reject();
+          return;
+        }
+
+        this.isAuthenticated = true;
+        dfd.resolve(user);
+      }.bind(this));
 
       return dfd.promise;
     }

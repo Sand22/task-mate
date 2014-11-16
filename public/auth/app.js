@@ -1,20 +1,16 @@
 (function () {
   'use strict';
 
-  angular.module('app.auth', ['ngRoute'])
+  angular.module('app.auth', ['ngRoute', 'app.common'])
     .run(run);
 
   ////**////
 
   /* @ngInject */
   function run($rootScope, $location, UserService) {
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      if (next.$$route.roles && next.$$route.roles.length) {
-        UserService.isAuthenticated().then(function () {
-          return;
-        }, function () {
-          $location.path('/login');
-        });
+    $rootScope.$on('$routeChangeError', function (event, next) {
+      if (next.$$route.loginRequired) {
+        $location.path('/login');
       }
     });
   }

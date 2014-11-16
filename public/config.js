@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('app')
@@ -9,7 +9,12 @@
     $routeProvider
       .when('/', {
         templateUrl: '/views/common/partials/main',
-        roles: ['user']
+        resolve: {
+          user: function (UserService) {
+            return UserService.getUser();
+          }
+        },
+        loginRequired: true
       })
       .when('/404', {
         templateUrl: '/views/common/partials/404'

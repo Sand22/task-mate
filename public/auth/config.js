@@ -5,10 +5,12 @@
     .config(config);
 
   /* @ngInject */
-  function config($routeProvider) {
+  function config($routeProvider, $provide) {
     $routeProvider
       .when('/login', {
-        templateUrl: '/views/auth/partials/login'
+        templateUrl: '/views/auth/partials/login',
+        controller: 'UserController',
+        controllerAs: 'User'
       });
   }
 })();
