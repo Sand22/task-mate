@@ -18,7 +18,10 @@ var gulp = require('gulp'),
     'public/**/tests/**/**/*.js'
   ],
   scripts = [
-    'public/vendor/!(bootstrap|jquery|angular-mocks)/*.min.js',
+    'public/vendor/!(angular-mocks)/*.min.js',
+    'public/vendor/firebase/firebase.js',
+    'public/vendor/firebase-simple-login/firebase-simple-login.js',
+    'public/vendor/angularfire/dist/angularfire.min.js',
     'public/*.js',
     'public/!(vendor)/**/*.js',
     '!public/**/tests/**/**/*.js'
