@@ -30,6 +30,7 @@
     function logout() {
       AuthService.logout();
       UserService.isAuthenticated = false;
+      UserService.user = undefined;
       $location.path('/login');
     }
   }
