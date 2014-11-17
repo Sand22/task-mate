@@ -6,6 +6,9 @@ module.exports = function (config) {
       'public/vendor/angular/angular.js',
       'public/vendor/angular-mocks/angular-mocks.js',
       'public/vendor/angular-route/angular-route.js',
+      'public/vendor/mockfirebase/dist/mockfirebase.js',
+      'public/vendor/angularfire/dist/angularfire.min.js',
+      'public/vendor/lodash/dist/lodash.min.js',
       'public/*.js',
       'public/!(vendor)/**/*.js'
     ],
