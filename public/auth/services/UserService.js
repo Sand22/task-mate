@@ -19,7 +19,7 @@
 
       auth.$getCurrentUser().then(function (user) {
         if(!user) {
-          dfd.reject();
+          dfd.reject('Not authorized!');
           return;
         }
 

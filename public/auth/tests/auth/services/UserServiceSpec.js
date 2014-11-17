@@ -2,24 +2,60 @@ describe('UserService', function () {
   'use strict';
 
   var UserService,
-    isAuthenticated;
+    scope;
 
-  beforeEach(module('app'));
-  beforeEach(inject(function ($timeout, _UserService_) {
-    UserService = _UserService_;
-    spyOn(UserService, 'isAuthenticated').and.callThrough();
-    UserService.isAuthenticated().then(function () {
-      isAuthenticated = true;
-    }, function () {
-      isAuthenticated = false;
+  MockFirebase.override();
+
+  beforeEach(module('app.auth', function ($provide) {
+    $provide.factory('$firebaseSimpleLogin', function ($q) {
+      return function() {
+        return {
+          $getCurrentUser: function () {
+            var dfd = $q.defer();
+            dfd.resolve(null);
+            return dfd.promise;
+          }
+        };
+      };
     });
-    $timeout.flush();
   }));
 
   describe('authenticating user', function () {
     it('should not be authenticated', function () {
-      UserService.isAuthenticated();
-      expect(isAuthenticated).toBeFalsy();
+      inject(function ($rootScope, _UserService_) {
+        UserService = _UserService_;
+        scope = $rootScope.$new();
+      });
+      expect(UserService.isAuthenticated).toBeFalsy();
+    });
+
+    it('should error be returned by getUser when not logged in', function () {
+      UserService.getUser().catch(function (err) {
+        expect(err).toEqual('Not authorized!');
+      });
+      scope.$digest();
+    });
+    it('should be authenticated if $getCurrentUser returns user', function () {
+      module('app.auth', function ($provide) {
+        $provide.factory('$firebaseSimpleLogin', function ($q) {
+          return function() {
+            return {
+              $getCurrentUser: function () {
+                var dfd = $q.defer();
+                dfd.resolve({email: 'admin@example.com'});
+                return dfd.promise;
+              }
+            };
+          };
+        });
+      });
+      inject(function ($rootScope, _UserService_) {
+        UserService = _UserService_;
+        scope = $rootScope.$new();
+      });
+      UserService.getUser();
+      scope.$digest();
+      expect(UserService.isAuthenticated).toBeTruthy();
     });
   });
 });
